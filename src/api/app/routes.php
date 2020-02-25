@@ -3,13 +3,23 @@ declare(strict_types=1);
 
 use App\Application\Actions\User\ListUsersAction;
 use App\Application\Actions\User\ViewUserAction;
-use App\Application\Object\Hello;
+use App\Application\Object\Device;
+use App\Application\Object\Message;
+use App\Application\Object\Room;
 use Slim\App;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
 return function (App $app) {
-    $app->get('/', Hello::class . ':world');
-    $app->get('/hello/{id}', Hello::class . ':worldWId');
 
-    $app->get('/devices/{id}/measures', Device::class . ':getMeasures');
+    $app->get('/devices', Device::class . ':getAllDevice');
+    $app->get('/devices/{id}', Device::class . ':getDeviceById');
+    $app->get('/devices/{id}/measures', Device::class . ':getDeviceMeasuresById');
+
+    $app->get('/message', Message::class . ':getAllMessage');
+    $app->get('/message/{id}', Message::class . ':getMessageById');
+
+    $app->get('/room', Room::class . ':getAllRoom');
+    $app->get('/room/{id}', Room::class . ':getRoomById');
+    $app->get('/room/{id}/measures', Room::class . ':getRoomMeasuresById');
+
 };
