@@ -29,17 +29,17 @@ CREATE TABLE Device(
 
 
 #------------------------------------------------------------
-# Table: Message
+# Table: Measure
 #------------------------------------------------------------
 
-CREATE TABLE Message(
-        MessageId          Int  Auto_increment  NOT NULL ,
-        MessageTemperature Varchar (254) NOT NULL ,
-        MessageHumidity    Varchar (254) NOT NULL ,
-        MessageTime        Varchar (254) NOT NULL ,
+CREATE TABLE Measure(
+        MeasureId          Int  Auto_increment  NOT NULL ,
+        MeasureTemperature Varchar (254) NOT NULL ,
+        MeasureHumidity    Varchar (254) NOT NULL ,
+        MeasureTime        Varchar (254) NOT NULL ,
         DeviceId           Int NOT NULL
-	,CONSTRAINT Message_PK PRIMARY KEY (MessageId)
+	,CONSTRAINT Measure_PK PRIMARY KEY (MeasureId)
 
-	,CONSTRAINT Message_Device_FK FOREIGN KEY (DeviceId) REFERENCES Device(DeviceId)
+	,CONSTRAINT Measure_Device_FK FOREIGN KEY (DeviceId) REFERENCES Device(DeviceId)
 )ENGINE=InnoDB;
 
