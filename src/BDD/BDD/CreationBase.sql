@@ -20,7 +20,7 @@ CREATE TABLE Room(
 
 CREATE TABLE Device(
         DeviceId   Int  Auto_increment  NOT NULL ,
-        DeviceName Varchar (10) NOT NULL ,
+        DeviceName Varchar (15) NOT NULL ,
         RoomNumber Int NOT NULL
 	,CONSTRAINT Device_PK PRIMARY KEY (DeviceId)
 
