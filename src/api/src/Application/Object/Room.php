@@ -41,8 +41,43 @@ class Room
      * Fonction qui retourne toutes les informations d'une salle à l'aide de son Id
      */
     public function getRoomById (Request $request, Response $response, $args) {
-        $response->getBody()->write('La salle '. $args['id']. ' se nomme : B1-0'. $args['id']);
-        return $response;
+
+        $db = new Database();
+        $connection  = $db->getConnection();
+
+        $query = "SELECT Room.RoomNumber as rNumb, Room.RoomName as rName FROM Room WHERE Room.RoomNumber = :id";
+
+        $req = $connection->prepare($query);
+
+        $req->bindParam(':id', $args['id']);
+
+        $req->execute();
+
+        $data = [];
+
+        if ($req->rowCount() > 0) {
+            $result = $req->fetchAll(\PDO::FETCH_ASSOC);
+
+            $data[] = array(
+                "Name" => $result[0]['rNumb'],
+                "Room" => $result[0]['rName']
+            );
+
+        } else {
+            $payload = json_encode(array(
+                "Error" => [
+                    "Code" => 404,
+                    "Message" => "Room not found"
+                ]
+            ));
+            $response->getBody()->write($payload);
+            return $response->withHeader('Content-Type', 'application/json')->withStatus(404);
+        }
+
+        $payload = json_encode($data);
+
+        $response->getBody()->write($payload);
+        return $response->withHeader('Content-Type', 'application/json');
     }
     
     /*
