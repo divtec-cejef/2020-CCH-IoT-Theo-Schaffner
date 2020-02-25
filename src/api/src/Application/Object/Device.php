@@ -74,7 +74,32 @@ FROM Device INNER JOIN Room ON Device.RoomNumber = Room.RoomNumber WHERE Device.
      * Fonction qui retourne toutes les mesures d'un device à l'aide de son Id
      */
     public function getDeviceMeasuresById (Request $request, Response $response, $args) {
-        $response->getBody()->write('Le device '. $args['id']. ' indique une chaleur de 17° et une humidité de 30%');
-        return $response;
+
+        $db = new Database();
+        $connection  = $db->getConnection();
+
+        $query = "SELECT Measure.MeasureId, Measure.MeasureTemperature as mTemp, Measure.MeasureHumidity as mHum, 
+Measure.MeasureTime as mTime FROM Measure WHERE Measure.DeviceId LIKE :id";
+
+        $req = $connection->prepare($query);
+
+        $req->bindParam(':id', $args['id']);
+
+        $req->execute();
+
+        $data = [];
+
+        while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
+            $data[] = array(
+                "id" => $row['MeasureId'],
+                "Température" => $row['mTemp'],
+                "Humidité" => $row['mHum'],
+                "Temps" => date('Y-m-d H:i:s', $row['mTime'])
+            );
+        }
+        $payload = json_encode($data);
+
+        $response->getBody()->write($payload);
+        return $response->withHeader('Content-Type', 'application/json');
     }
 }
