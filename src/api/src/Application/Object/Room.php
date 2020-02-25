@@ -13,8 +13,28 @@ class Room
      * Fonction qui retourne toutes les salles
      */
     public function getAllRoom (Request $request, Response $response, $args) {
-        $response->getBody()->write('Salle 1 : B1-01');
-        return $response;
+
+        $db = new Database();
+        $connection  = $db->getConnection();
+
+        $query = "SELECT Room.RoomNumber as rNumb, Room.RoomName as rName FROM Room";
+
+        $req = $connection->prepare($query);
+
+        $req->execute();
+
+        $data = [];
+
+        while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
+            $data[] = array(
+                "Name" => $row['rNumb'],
+                "Room" => $row['rName']
+            );
+        }
+        $payload = json_encode($data);
+
+        $response->getBody()->write($payload);
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
     /*
