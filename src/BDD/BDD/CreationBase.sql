@@ -1,23 +1,45 @@
-CREATE TABLE Salle
-(
-    id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    NomSalle varchar(5) not null
-);
+#------------------------------------------------------------
+#        Script MySQL.
+#------------------------------------------------------------
 
-CREATE TABLE Device
-(
-    id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    NomDevice varchar(10) not null UNIQUE,
-	id_Salle int(11) not null,
-    FOREIGN KEY (id_Salle) REFERENCES Salle(id)
-);
 
-CREATE TABLE Messages
-(
-    id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    Temperature varchar(254) not null,
-    Humidite varchar(254) not null,
-    DateHeure varchar(254) not null,
-	id_Device int(11) not null,
-    FOREIGN KEY (id_Device) REFERENCES Device(id)
-);
+#------------------------------------------------------------
+# Table: Room
+#------------------------------------------------------------
+
+CREATE TABLE Room(
+        RoomNumber Int  Auto_increment  NOT NULL ,
+        RoomName   Varchar (5) NOT NULL
+	,CONSTRAINT Room_PK PRIMARY KEY (RoomNumber)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Device
+#------------------------------------------------------------
+
+CREATE TABLE Device(
+        DeviceId   Int  Auto_increment  NOT NULL ,
+        DeviceName Varchar (10) NOT NULL ,
+        RoomNumber Int NOT NULL
+	,CONSTRAINT Device_PK PRIMARY KEY (DeviceId)
+
+	,CONSTRAINT Device_Room_FK FOREIGN KEY (RoomNumber) REFERENCES Room(RoomNumber)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Message
+#------------------------------------------------------------
+
+CREATE TABLE Message(
+        MessageId          Int  Auto_increment  NOT NULL ,
+        MessageTemperature Varchar (254) NOT NULL ,
+        MessageHumidity    Varchar (254) NOT NULL ,
+        MessageTime        Varchar (254) NOT NULL ,
+        DeviceId           Int NOT NULL
+	,CONSTRAINT Message_PK PRIMARY KEY (MessageId)
+
+	,CONSTRAINT Message_Device_FK FOREIGN KEY (DeviceId) REFERENCES Device(DeviceId)
+)ENGINE=InnoDB;
+
