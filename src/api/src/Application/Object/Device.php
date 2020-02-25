@@ -104,9 +104,9 @@ Measure.MeasureTime as mTime FROM Measure WHERE Measure.DeviceId LIKE :id";
         while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
             $data[] = array(
                 "Id" => $row['mId'],
-                "Température" => $row['mTemp'],
-                "Humidité" => $row['mHum'],
-                "Temps" => date('Y-m-d H:i:s', $row['mTime'])
+                "Temperature" => $row['mTemp'],
+                "Humidity" => $row['mHum'],
+                "Time" => date('Y-m-d H:i:s', $row['mTime'])
             );
         }
         $payload = json_encode($data);

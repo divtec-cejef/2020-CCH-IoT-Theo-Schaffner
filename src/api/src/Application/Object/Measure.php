@@ -29,8 +29,8 @@ Measure.MeasureTime as mTime FROM Measure";
         while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
             $data[] = array(
                 "Id" => $row['mId'],
-                "Température" => $row['mTemp'],
-                "Humidité" => $row['mHum'],
+                "Temperature" => $row['mTemp'],
+                "Humidity" => $row['mHum'],
                 "Time" => date('Y-m-d H:i:s', $row['mTime'])
             );
         }
@@ -62,8 +62,8 @@ Measure.MeasureTime as mTime, Device.DeviceName as dName FROM Measure INNER JOIN
         while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
             $data[] = array(
                 "Id" => $row['mId'],
-                "Température" => $row['mTemp'],
-                "Humidité" => $row['mHum'],
+                "Temperature" => $row['mTemp'],
+                "Humidity" => $row['mHum'],
                 "Time" => date('Y-m-d H:i:s', $row['mTime']),
                 "Device Name" => $row['dName']
             );
