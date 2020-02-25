@@ -15,11 +15,11 @@ return function (App $app) {
     $app->get('/devices/{id}', Device::class . ':getDeviceById');
     $app->get('/devices/{id}/measures', Device::class . ':getDeviceMeasuresById');
 
-    $app->get('/measure', Measure::class . ':getAllMeasure');
-    $app->get('/measure/{id}', Measure::class . ':getMeasureById');
+    $app->get('/measures', Measure::class . ':getAllMeasure');
+    $app->get('/measures/{id}', Measure::class . ':getMeasureById');
 
-    $app->get('/room', Room::class . ':getAllRoom');
-    $app->get('/room/{id}', Room::class . ':getRoomById');
-    $app->get('/room/{id}/measures', Room::class . ':getRoomMeasuresById');
+    $app->get('/rooms', Room::class . ':getAllRoom');
+    $app->get('/rooms/{id}', Room::class . ':getRoomById');
+    $app->get('/rooms/{id}/measures', Room::class . ':getRoomMeasuresById');
 
 };
