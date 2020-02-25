@@ -12,9 +12,30 @@ class Device
     /*
      * Fonction qui retourne tous les device de la base de donnée
      */
-    public function getAllDevice (Request $request, Response $response, $args) {
-        $response->getBody()->write('Device 1 : MKR-FOX-SCHATHE');
-        return $response;
+    public function getAllDevice (Request $request, Response $response) {
+
+        $db = new Database();
+        $connection  = $db->getConnection();
+
+        $query = "SELECT Device.DeviceId, Device.DeviceName as dname, Room.RoomName as rname FROM Device INNER JOIN Room ON Device.RoomNumber = Room.RoomNumber";
+
+        $req = $connection->prepare($query);
+
+        $req->execute();
+
+        $data = [];
+
+        while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
+            $data[] = array(
+                "id" => $row['DeviceId'],
+                "name" => $row['dname'],
+                "room" => $row['rname']
+            );
+        }
+        $payload = json_encode($data);
+
+        $response->getBody()->write($payload);
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
     /*
