@@ -17,7 +17,7 @@ class Device
         $db = new Database();
         $connection  = $db->getConnection();
 
-        $query = "SELECT Device.DeviceId, Device.DeviceName as dname, Room.RoomName as rname FROM Device INNER JOIN Room ON Device.RoomNumber = Room.RoomNumber";
+        $query = "SELECT Device.DeviceId as dId, Device.DeviceName as dName, Room.RoomName as rName FROM Device INNER JOIN Room ON Device.RoomNumber = Room.RoomNumber";
 
         $req = $connection->prepare($query);
 
@@ -27,9 +27,9 @@ class Device
 
         while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
             $data[] = array(
-                "id" => $row['DeviceId'],
-                "name" => $row['dname'],
-                "room" => $row['rname']
+                "Id" => $row['dId'],
+                "Name" => $row['dName'],
+                "Room" => $row['rName']
             );
         }
         $payload = json_encode($data);
@@ -46,7 +46,7 @@ class Device
         $db = new Database();
         $connection  = $db->getConnection();
 
-        $query = "SELECT Device.DeviceId, Device.DeviceName as dname, Room.RoomName as rname 
+        $query = "SELECT Device.DeviceId as dId, Device.DeviceName as dname, Room.RoomName as rname 
 FROM Device INNER JOIN Room ON Device.RoomNumber = Room.RoomNumber WHERE Device.DeviceId LIKE :id";
 
         $req = $connection->prepare($query);
@@ -60,16 +60,16 @@ FROM Device INNER JOIN Room ON Device.RoomNumber = Room.RoomNumber WHERE Device.
             $result = $req->fetchAll(\PDO::FETCH_ASSOC);
 
             $data = [
-                "id" => $result[0]['DeviceId'],
-                "name" => $result[0]['dname'],
-                "room" => $result[0]['rname']
+                "Id" => $result[0]['dId'],
+                "Name" => $result[0]['dName'],
+                "Room" => $result[0]['rName']
             ];
 
         } else {
             $payload = json_encode(array(
-                "error" => [
-                    "code" => 404,
-                    "message" => "device not found"
+                "Error" => [
+                    "Code" => 404,
+                    "Message" => "Device not found"
                 ]
             ));
             $response->getBody()->write($payload);
@@ -90,7 +90,7 @@ FROM Device INNER JOIN Room ON Device.RoomNumber = Room.RoomNumber WHERE Device.
         $db = new Database();
         $connection  = $db->getConnection();
 
-        $query = "SELECT Measure.MeasureId, Measure.MeasureTemperature as mTemp, Measure.MeasureHumidity as mHum, 
+        $query = "SELECT Measure.MeasureId as mId, Measure.MeasureTemperature as mTemp, Measure.MeasureHumidity as mHum, 
 Measure.MeasureTime as mTime FROM Measure WHERE Measure.DeviceId LIKE :id";
 
         $req = $connection->prepare($query);
@@ -103,7 +103,7 @@ Measure.MeasureTime as mTime FROM Measure WHERE Measure.DeviceId LIKE :id";
 
         while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
             $data[] = array(
-                "id" => $row['MeasureId'],
+                "Id" => $row['mId'],
                 "Température" => $row['mTemp'],
                 "Humidité" => $row['mHum'],
                 "Temps" => date('Y-m-d H:i:s', $row['mTime'])
