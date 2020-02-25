@@ -42,8 +42,32 @@ class Device
      * Fonction qui retourne toutes les informations d'un device à l'aide de son Id
      */
     public function getDeviceById (Request $request, Response $response, $args) {
-        $response->getBody()->write('Le device '. $args['id']. ' se nomme MKR-FOX-...');
-        return $response;
+
+        $db = new Database();
+        $connection  = $db->getConnection();
+
+        $query = "SELECT Device.DeviceId, Device.DeviceName as dname, Room.RoomName as rname 
+FROM Device INNER JOIN Room ON Device.RoomNumber = Room.RoomNumber WHERE Device.DeviceId LIKE :id";
+
+        $req = $connection->prepare($query);
+
+        $req->bindParam(':id', $args['id']);
+
+        $req->execute();
+
+        $data = [];
+
+        while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
+            $data[] = array(
+                "id" => $row['DeviceId'],
+                "name" => $row['dname'],
+                "room" => $row['rname']
+            );
+        }
+        $payload = json_encode($data);
+
+        $response->getBody()->write($payload);
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
     /*
