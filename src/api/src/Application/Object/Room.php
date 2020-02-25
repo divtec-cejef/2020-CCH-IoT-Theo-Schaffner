@@ -79,40 +79,4 @@ class Room
         $response->getBody()->write($payload);
         return $response->withHeader('Content-Type', 'application/json');
     }
-    
-    /*
-     * Fonction qui retourne toutes les mesures d'une salle à l'aide de son Id
-     */
-    public function getRoomMeasuresById (Request $request, Response $response, $args) {
-
-        $db = new Database();
-        $connection  = $db->getConnection();
-
-        $query = "SELECT Measure.MeasureId as mId, Measure.MeasureTemperature as mTemp, Measure.MeasureHumidity as mHum, 
-Measure.MeasureTime as mTime, Room.RoomName as rName FROM Measure 
-INNER JOIN Device ON Measure.DeviceId = Device.DeviceId 
-INNER JOIN Room ON Device.RoomNumber = Room.RoomNumber WHERE Room.RoomNumber = :id";
-
-        $req = $connection->prepare($query);
-
-        $req->bindParam(':id', $args['id']);
-
-        $req->execute();
-
-        $data = [];
-
-        while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
-            $data[] = array(
-                "Id" => $row['mId'],
-                "Temperature" => $row['mTemp'],
-                "Humidity" => $row['mHum'],
-                "Time" => $row['mTime'],
-                "Room Name" => $row['rName']
-            );
-        }
-        $payload = json_encode($data);
-
-        $response->getBody()->write($payload);
-        return $response->withHeader('Content-Type', 'application/json');
-    }
 }

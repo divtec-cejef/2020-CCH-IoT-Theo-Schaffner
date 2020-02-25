@@ -20,6 +20,5 @@ return function (App $app) {
 
     $app->get('/rooms', Room::class . ':getAllRoom');
     $app->get('/rooms/{id}', Room::class . ':getRoomById');
-    $app->get('/rooms/{id}/measures', Room::class . ':getRoomMeasuresById');
 
 };
