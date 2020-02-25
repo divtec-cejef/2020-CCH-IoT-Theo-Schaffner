@@ -56,14 +56,26 @@ FROM Device INNER JOIN Room ON Device.RoomNumber = Room.RoomNumber WHERE Device.
         $req->execute();
 
         $data = [];
+        if ($req->rowCount() > 0) {
+            $result = $req->fetchAll(\PDO::FETCH_ASSOC);
 
-        while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
-            $data[] = array(
-                "id" => $row['DeviceId'],
-                "name" => $row['dname'],
-                "room" => $row['rname']
-            );
+            $data = [
+                "id" => $result[0]['DeviceId'],
+                "name" => $result[0]['dname'],
+                "room" => $result[0]['rname']
+            ];
+
+        } else {
+            $payload = json_encode(array(
+                "error" => [
+                    "code" => 404,
+                    "message" => "device not found"
+                ]
+            ));
+            $response->getBody()->write($payload);
+            return $response->withHeader('Content-Type', 'application/json')->withStatus(404);
         }
+
         $payload = json_encode($data);
 
         $response->getBody()->write($payload);
