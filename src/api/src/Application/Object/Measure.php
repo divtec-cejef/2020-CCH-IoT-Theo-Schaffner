@@ -12,9 +12,32 @@ class Measure
     /*
      * Fonction qui retourne tous les messages
      */
-    public function getAllMessage (Request $request, Response $response, $args) {
-        $response->getBody()->write('message 1 : 101e');
-        return $response;
+    public function getAllMeasure (Request $request, Response $response, $args) {
+
+        $db = new Database();
+        $connection  = $db->getConnection();
+
+        $query = "SELECT Measure.MeasureId as mId, Measure.MeasureTemperature as mTemp, Measure.MeasureHumidity as mHum, 
+Measure.MeasureTime as mTime FROM Measure";
+
+        $req = $connection->prepare($query);
+
+        $req->execute();
+
+        $data = [];
+
+        while ($row = $req->fetch(\PDO::FETCH_ASSOC)) {
+            $data[] = array(
+                "Id" => $row['mId'],
+                "Température" => $row['mTemp'],
+                "Humidité" => $row['mHum'],
+                "Time" => date('Y-m-d H:i:s', $row['mTime'])
+            );
+        }
+        $payload = json_encode($data);
+
+        $response->getBody()->write($payload);
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
     /*

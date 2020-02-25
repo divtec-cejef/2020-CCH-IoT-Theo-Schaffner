@@ -15,8 +15,8 @@ return function (App $app) {
     $app->get('/devices/{id}', Device::class . ':getDeviceById');
     $app->get('/devices/{id}/measures', Device::class . ':getDeviceMeasuresById');
 
-    $app->get('/message', Measure::class . ':getAllMessage');
-    $app->get('/message/{id}', Measure::class . ':getMessageById');
+    $app->get('/measure', Measure::class . ':getAllMeasure');
+    $app->get('/measure/{id}', Measure::class . ':getMeasureById');
 
     $app->get('/room', Room::class . ':getAllRoom');
     $app->get('/room/{id}', Room::class . ':getRoomById');
