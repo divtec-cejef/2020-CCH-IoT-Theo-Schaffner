@@ -6,6 +6,7 @@ use App\Application\Actions\User\ViewUserAction;
 use App\Application\Object\Device;
 use App\Application\Object\Measure;
 use App\Application\Object\Room;
+use App\Application\Object\Callback;
 use Slim\App;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
@@ -21,4 +22,5 @@ return function (App $app) {
     $app->get('/rooms', Room::class . ':getAllRoom');
     $app->get('/rooms/{id}', Room::class . ':getRoomById');
 
+    $app->post('/callback', Callback::class . ':callback');
 };
