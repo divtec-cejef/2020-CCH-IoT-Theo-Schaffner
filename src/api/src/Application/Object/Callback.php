@@ -50,16 +50,15 @@ class Callback
 
         $req->execute();
 
-        $idDevice = $connection->lastInsertId();
-
-        $query = "INSERT INTO Measure VALUES(null, :temp, :hum, :time, :idDevice);";
+        $query = "INSERT INTO Measure VALUES(null, :temp, :hum, :insertTime, 
+(SELECT DeviceId FROM Device WHERE DeviceName = :id));";
 
         $req = $connection->prepare($query);
 
         $req->bindParam(':temp', $temp);
         $req->bindParam(':hum', $hum);
-        $req->bindParam(':time', $time);
-        $req->bindParam(':idDevice', $idDevice);
+        $req->bindParam(':insertTime', $time);
+        $req->bindParam(':id', $id);
 
         $req->execute();
     }
