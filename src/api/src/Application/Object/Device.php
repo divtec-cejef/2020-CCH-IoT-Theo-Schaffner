@@ -17,7 +17,8 @@ class Device
         $db = new Database();
         $connection  = $db->getConnection();
 
-        $query = "SELECT Device.DeviceId as dId, Device.DeviceName as dName, Room.RoomName as rName FROM Device INNER JOIN Room ON Device.RoomNumber = Room.RoomNumber";
+        $query = "SELECT Device.DeviceId as dId, Device.DeviceName as dName, Room.RoomName as rName FROM Device 
+INNER JOIN Room ON Device.RoomNumber = Room.RoomNumber";
 
         $req = $connection->prepare($query);
 
@@ -46,8 +47,8 @@ class Device
         $db = new Database();
         $connection  = $db->getConnection();
 
-        $query = "SELECT Device.DeviceId as dId, Device.DeviceName as dname, Room.RoomName as rname 
-FROM Device INNER JOIN Room ON Device.RoomNumber = Room.RoomNumber WHERE Device.DeviceId LIKE :id";
+        $query = "SELECT Device.DeviceId as dId, Device.DeviceName as dName, Room.RoomName as rName FROM Device 
+INNER JOIN Room ON Device.RoomNumber = Room.RoomNumber WHERE Device.DeviceId LIKE :id";
 
         $req = $connection->prepare($query);
 
