@@ -20,17 +20,47 @@ class Callback
         $hum = hexdec(substr($temphum, -2, 2));
 
         if (isset($id) && isset($time) && isset($temp) && isset($hum)) {
-            $data = array(
-                "id" => $id,
-                "time" => $time,
-                "humidity" => $hum,
-                "temperature" => $temp
-            );
-
-            $payload = json_encode($data);
-
-            $response->getBody()->write($payload);
-            return $response->withHeader('Content-Type', 'application/json');
+            $this->insertDeviceAndData($id, $time, $temp, $hum);
         }
+        $data = array(
+            "id" => $id,
+            "time" => $time,
+            "humidity" => $hum,
+            "temperature" => $temp
+        );
+
+        $payload = json_encode($data);
+
+        $response->getBody()->write($payload);
+        return $response->withHeader('Content-Type', 'application/json');
+
+    }
+
+    private function insertDeviceAndData($id, $time, $temp, $hum)
+    {
+        // insertion des données dans la base de données
+        $db = new Database();
+        $connection = $db->getConnection();
+
+        $query = "INSERT IGNORE INTO Device VALUES(null, :device, 4);";
+
+        $req = $connection->prepare($query);
+
+        $req->bindParam(':device', $id);
+
+        $req->execute();
+
+        $idDevice = $connection->lastInsertId();
+
+        $query = "INSERT INTO Measure VALUES(null, :temp, :hum, :time, :idDevice);";
+
+        $req = $connection->prepare($query);
+
+        $req->bindParam(':temp', $temp);
+        $req->bindParam(':hum', $hum);
+        $req->bindParam(':time', $time);
+        $req->bindParam(':idDevice', $idDevice);
+
+        $req->execute();
     }
 }
