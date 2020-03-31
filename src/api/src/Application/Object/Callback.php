@@ -17,6 +17,7 @@ class Callback
 
         $temp = hexdec(substr($temphum, 0, 2));
         $hum = hexdec(substr($temphum, -2, 2));
+        $time = date('Y-m-d H:i:s',$time);
 
         if (isset($id) && isset($time) && isset($temp) && isset($hum)) {
             $this->insertDeviceAndData($id, $time, $temp, $hum);
@@ -48,8 +49,6 @@ class Callback
         $req->bindParam(':device', $id);
 
         $req->execute();
-
-        $time = date('Y-m-d H:i:s',$time);
 
         $query = "INSERT INTO Measure VALUES(null, :temp, :hum, :insertTime, 
 (SELECT DeviceId FROM Device WHERE DeviceName = :id));";
