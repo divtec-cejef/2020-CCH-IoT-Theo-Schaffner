@@ -21,7 +21,7 @@ CREATE TABLE Room(
 CREATE TABLE Device(
         DeviceId   Int  Auto_increment  NOT NULL ,
         DeviceName Varchar (15) NOT NULL UNIQUE ,
-        RoomNumber Int NOT NULL
+        RoomNumber Int 
 	,CONSTRAINT Device_PK PRIMARY KEY (DeviceId)
 
 	,CONSTRAINT Device_Room_FK FOREIGN KEY (RoomNumber) REFERENCES Room(RoomNumber)
@@ -36,7 +36,7 @@ CREATE TABLE Measure(
         MeasureId          Int  Auto_increment  NOT NULL ,
         MeasureTemperature Varchar (254) NOT NULL ,
         MeasureHumidity    Varchar (254) NOT NULL ,
-        MeasureTime        Datetime (254) NOT NULL,
+        MeasureTime        Datetime NOT NULL,
         DeviceId           Int NOT NULL
 	,CONSTRAINT Measure_PK PRIMARY KEY (MeasureId)
 
