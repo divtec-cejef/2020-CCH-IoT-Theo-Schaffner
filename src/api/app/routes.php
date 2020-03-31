@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 use App\Application\Actions\User\ListUsersAction;
 use App\Application\Actions\User\ViewUserAction;
@@ -12,15 +11,15 @@ use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
 return function (App $app) {
 
-    $app->get('/devices', Device::class . ':getAllDevice');
-    $app->get('/devices/{id}', Device::class . ':getDeviceById');
-    $app->get('/devices/{id}/measures', Device::class . ':getDeviceMeasuresById');
+    $app->get('/IoT/api/devices', Device::class . ':getAllDevice');
+    $app->get('/IoT/api/devices/{id}', Device::class . ':getDeviceById');
+    $app->get('/IoT/api/devices/{id}/measures', Device::class . ':getDeviceMeasuresById');
 
-    $app->get('/measures', Measure::class . ':getAllMeasure');
-    $app->get('/measures/{id}', Measure::class . ':getMeasureById');
+    $app->get('/IoT/api/measures', Measure::class . ':getAllMeasure');
+    $app->get('/IoT/api/measures/{id}', Measure::class . ':getMeasureById');
 
-    $app->get('/rooms', Room::class . ':getAllRoom');
-    $app->get('/rooms/{id}', Room::class . ':getRoomById');
+    $app->get('/IoT/api/rooms', Room::class . ':getAllRoom');
+    $app->get('/IoT/api/rooms/{id}', Room::class . ':getRoomById');
 
-    $app->post('/callback', Callback::class . ':callback');
+    $app->post('/IoT/api/callback', Callback::class . ':callback');
 };
