@@ -7,7 +7,6 @@ use PDO;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-
 class Callback
 {
     public function callback(Request $request, Response $response, $args)
@@ -49,6 +48,8 @@ class Callback
         $req->bindParam(':device', $id);
 
         $req->execute();
+
+        $time = date('Y-m-d H:i:s',$time);
 
         $query = "INSERT INTO Measure VALUES(null, :temp, :hum, :insertTime, 
 (SELECT DeviceId FROM Device WHERE DeviceName = :id));";

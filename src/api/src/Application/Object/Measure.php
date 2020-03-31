@@ -31,7 +31,7 @@ Measure.MeasureTime as mTime FROM Measure";
                 "Id" => $row['mId'],
                 "Temperature" => $row['mTemp'],
                 "Humidity" => $row['mHum'],
-                "Time" => date('Y-m-d H:i:s', $row['mTime'])
+                "Time" => $row['mTime']
             );
         }
         $payload = json_encode($data);

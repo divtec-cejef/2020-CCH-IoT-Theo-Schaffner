@@ -36,7 +36,7 @@ CREATE TABLE Measure(
         MeasureId          Int  Auto_increment  NOT NULL ,
         MeasureTemperature Varchar (254) NOT NULL ,
         MeasureHumidity    Varchar (254) NOT NULL ,
-        MeasureTime        Varchar (254) NOT NULL ,
+        MeasureTime        Datetime (254) NOT NULL,
         DeviceId           Int NOT NULL
 	,CONSTRAINT Measure_PK PRIMARY KEY (MeasureId)
 
