@@ -1,0 +1,24 @@
+body {
+    background-image: url("../img/plageImage.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: "Calibri Light",sans-serif;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 34px;
+}
+
+div {
+    font-size: 28px;
+}
+
+p {
+    font-weight: bold;
+}

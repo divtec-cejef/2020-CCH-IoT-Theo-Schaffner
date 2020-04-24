@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>IoT Schathe</title>
+    <meta name="author" content="Théo Schaffner">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <h1>Internet of Things</h1>
+
+    <h2>Dernières valeurs</h2>
+
+    <p>Température actuel : </p>
+    <div class="TempNow"></div>
+
+    <p>Humidité actuel : </p>
+    <div class="HumNow"></div>
+
+    <h2>Températures</h2>
+
+    <p>Température maximale : </p>
+    <div class="TempMax"></div>
+
+    <p>Température minimale : </p>
+    <div class="TempMin"></div>
+
+    <h2>Humidités</h2>
+
+    <p>Humidité maximale : </p>
+    <div class="HumMax"></div>
+
+    <p>Humidité minimale : </p>
+    <div class="HumMin"></div>
+
+    <h2>Graphique sur les valeurs de la semaine dernière</h2>
+
+    <canvas class="myChart" width="400" height="400"></canvas>
+</body>
+
+<script src="javascript/index.js"></script>
+<script src="javascript/Chart.js"></script>
+<script src="javascript/historique.js"></script>
+
+</html>
