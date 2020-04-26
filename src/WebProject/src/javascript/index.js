@@ -18,14 +18,12 @@
         let load = loadTemp();
 
         document.querySelector(".TempNow").innerHTML = '<div>' + load.last.temperature + '°C<\div>';
-        document.querySelector(".HumNow").innerHTML = '<div>' + load.last.humidity + '°C<\div>';
+        document.querySelector(".HumNow").innerHTML = '<div>' + load.last.humidity + '%<\div>';
         document.querySelector(".TempMax").innerHTML = '<div>' + load.temperature.max + '°C<\div>';
         document.querySelector(".TempMin").innerHTML = '<div>' + load.temperature.min + '°C<\div>';
-        document.querySelector(".HumMax").innerHTML = '<div>' + load.humidity.max + '°C<\div>';
-        document.querySelector(".HumMin").innerHTML = '<div>' + load.humidity.min + '°C<\div>';
+        document.querySelector(".HumMax").innerHTML = '<div>' + load.humidity.max + '%<\div>';
+        document.querySelector(".HumMin").innerHTML = '<div>' + load.humidity.min + '%<\div>';
     }
 
     setValues();
 }(document));
-
-

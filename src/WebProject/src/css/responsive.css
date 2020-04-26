@@ -1,0 +1,9 @@
+@media only screen and (min-width: 1000px) {
+    div div div {
+        display: inline;
+    }
+
+    h2 {
+        margin: 340px 50px 100px 50px;
+    }
+}

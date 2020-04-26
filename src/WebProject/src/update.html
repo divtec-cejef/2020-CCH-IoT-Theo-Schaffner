@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>IoT Schathe</title>
+    <meta name="author" content="Théo Schaffner">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<h1>Internet of Things</h1>
+
+<div class="updateH2">
+    <h2>Update</h2>
+</div>
+
+<form>
+    <p>
+        <label for="UpdateId">Id à modifier</label> :
+        <input type="text" name="UpdateId" id="UpdateId" required>
+    </p>
+    <p>
+        <label for="NewValueTemp">Nouvelle température</label> :
+        <input type="text" name="NewValueTemp" id="NewValueTemp" required>
+    </p>
+    <p>
+        <label for="NewValueHum">Nouvelle humidité</label> :
+        <input type="text" name="NewValueHum" id="NewValueHum" required>
+    </p>
+
+    <p>
+        <input type="submit" value="Modifier">
+    </p>
+</form>
+<div class="send"></div>
+</body>
+
+<script src="javascript/update.js"></script>
+
+</html>

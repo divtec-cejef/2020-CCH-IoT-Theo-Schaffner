@@ -1,0 +1,77 @@
+body {
+    background-image: url("../img/plageImage.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: "Arial",sans-serif;
+    margin: 0 0;
+}
+
+h1 {
+    font-size: 50px;
+    background-color: rgba(234, 22, 22, 0.6);
+    text-align: center;
+    text-decoration: underline;
+    padding: 40px 0;
+    margin-top: 0 !important;
+}
+
+h2 {
+    font-size: 40px;
+    background-color: rgba(234, 22, 22, 0.6);
+    text-align: center;
+    text-decoration: underline;
+    padding: 40px 0;
+    margin: 360px 50px 100px 50px;
+}
+
+div {
+    font-size: 35px;
+}
+
+p {
+    display: inline;
+    font-weight: bold;
+    font-size: 35px;
+    text-align: center;
+}
+
+.leftColumn, .rightColumn {
+    width: 45%;
+    display: inline-block;
+    text-align: center;
+    background-color: rgba(234, 22, 22, 0.6);
+    padding: 40px 0;
+}
+
+.leftColumn {
+    float: left;
+}
+
+.rightColumn {
+    float: right;
+}
+
+.chartjs-render-monitor {
+    width: 100% !important;
+    height: 700px !important;
+    background-color: rgba(222, 222, 222, 0.6);
+    text-align: center;
+}
+
+.lastValues h2, .updateH2 h2, .deleteH2 h2 {
+    margin-top: 100px;
+}
+
+.TempNow {
+    display: inline;
+}
+
+form {
+    text-align: center;
+}
+
+form p {
+    display: inherit;
+}
